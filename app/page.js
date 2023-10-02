@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Joystick } from "react-joystick-component";
 import useInterval from "use-interval";
 import { checkKey } from "@rwh/keystrokes";
@@ -44,11 +44,12 @@ export default function Home() {
   return (
     <div className="h-screen p-2 overflow-hidden">
       <div className="h-[calc(100vh-140px)] relative">
-        <motion.div className="w-24 h-24 bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"></motion.div>
         <motion.div
           style={{ x, y }}
           className="w-24 h-24 bg-red-500 absolute bottom-1/2 left-1/2"
         ></motion.div>
+        <motion.img style={{ x, y }} src="/building.png" width={400} />
+        <motion.div className="w-24 h-24 bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"></motion.div>
       </div>
       <div className="flex justify-center">
         <div className="flex items-center gap-32">
