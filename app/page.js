@@ -4,8 +4,24 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 export default function Home() {
+  const [x, setX] = useState(0);
+
   function onDrag(_, info) {
-    console.log(info.offset.x);
+    let delta = 0;
+
+    if (info.offset.x > 70) {
+      delta += 2;
+    } else if (info.offset.x <= 70 && info.offset.x > 0) {
+      delta += 1;
+    } else if (info.offset.x < -70) {
+      delta -= 2;
+    } else if (info.offset.x >= 70 && info.offset.x < 0) {
+      delta -= 1;
+    }
+
+    setX(x + delta);
+
+    console.log(x + delta);
   }
 
   return (
