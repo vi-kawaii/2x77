@@ -12,7 +12,8 @@
     "framer-motion": "^10.16.4",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "use-interval": "^1.4.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",

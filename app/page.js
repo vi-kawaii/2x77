@@ -2,29 +2,33 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import useInterval from "use-interval";
 
 export default function Home() {
   const [x, setX] = useState(0);
+  const state = useRef(null);
 
-  function onDrag(_, info) {
+  useInterval(() => {
     let delta = 0;
 
-    if (info.offset.x > 100) {
-      delta += 2;
-    } else if (info.offset.x <= 100 && info.offset.x > 50) {
-      delta += 1;
-    } else if (info.offset.x < -100) {
-      delta -= 2;
-    } else if (info.offset.x >= 100 && info.offset.x < 50) {
-      delta -= 1;
+    if (state.current === "run right") {
+      delta = 2;
     }
 
-    setX(x + delta);
-  }
+    setX((x) => x + delta);
+  }, 1 / 60);
 
-  useEffect(() => {
-    console.log(x);
-  }, [x]);
+  function onDrag(_, info) {
+    if (info.offset.x > 100) {
+      state.current = "run right";
+    } else if (info.offset.x <= 100 && info.offset.x > 50) {
+      state.current = "walk right";
+    } else if (info.offset.x < -100) {
+      state.current = "run left";
+    } else if (info.offset.x >= 100 && info.offset.x < 50) {
+      state.current = "walk left";
+    }
+  }
 
   return (
     <div className="max-w-sm mx-auto h-screen p-2">
