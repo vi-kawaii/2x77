@@ -3,9 +3,15 @@
 import { motion } from "framer-motion";
 
 export default function Home() {
+  function onDrag(_, info) {
+    console.log(info.offset.x);
+  }
+
   return (
     <div className="max-w-sm mx-auto h-screen p-2">
-      <div className="h-[calc(100vh-120px)]"></div>
+      <div className="h-[calc(100vh-120px)] relative">
+        <motion.div className="w-24 h-24 bg-white rounded-xl absolute bottom-12 left-12"></motion.div>
+      </div>
       <div className="gap-2 flex">
         <motion.button
           whileTap={{ scale: 0.9 }}
@@ -44,6 +50,7 @@ export default function Home() {
             </svg>
           </div>
           <motion.button
+            onDrag={onDrag}
             whileTap={{ scale: 0.9 }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
