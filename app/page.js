@@ -35,7 +35,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-sm mx-auto h-screen p-2 overflow-hidden">
+    <div className="h-screen p-2 overflow-hidden">
       <div className="h-[calc(100vh-140px)] relative">
         <motion.div className="w-24 h-24 bg-white absolute bottom-12 left-12"></motion.div>
         <motion.div
