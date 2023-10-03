@@ -11,14 +11,74 @@ export default function Home() {
   const [y, setY] = useState(0);
   const state = useRef(null);
 
+  const building = useRef();
+  const enemy = useRef();
+  const player = useRef();
+
   useInterval(() => {
+    const p = player.current.getBoundingClientRect();
+    const e = enemy.current.getBoundingClientRect();
+    const b = building.current.getBoundingClientRect();
+
+    const overlap = (rect1, rect2) =>
+      !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
+
     if (checkKey("a") || checkKey("ф") || checkKey("arrowleft")) {
+      const pNew = {
+        right: p.right - 2,
+        left: p.left - 2,
+        bottom: p.bottom,
+        top: p.top,
+      };
+
+      if (overlap(pNew, e) || overlap(pNew, b)) {
+        return;
+      }
+
       setX((x) => x + 2);
     } else if (checkKey("d") || checkKey("в") || checkKey("arrowright")) {
+      const pNew = {
+        right: p.right + 2,
+        left: p.left + 2,
+        bottom: p.bottom,
+        top: p.top,
+      };
+
+      if (overlap(pNew, e) || overlap(pNew, b)) {
+        return;
+      }
+
       setX((x) => x - 2);
     } else if (checkKey("w") || checkKey("ц") || checkKey("arrowup")) {
+      const pNew = {
+        right: p.right,
+        left: p.left,
+        bottom: p.bottom - 2,
+        top: p.top - 2,
+      };
+
+      if (overlap(pNew, e) || overlap(pNew, b)) {
+        return;
+      }
+
       setY((y) => y + 2);
     } else if (checkKey("s") || checkKey("ы") || checkKey("arrowdown")) {
+      const pNew = {
+        right: p.right,
+        left: p.left,
+        bottom: p.bottom + 2,
+        top: p.top + 2,
+      };
+
+      if (overlap(pNew, e) || overlap(pNew, b)) {
+        return;
+      }
+
       setY((y) => y - 2);
     }
 
@@ -46,10 +106,19 @@ export default function Home() {
       <div className="h-[calc(100vh-140px)] relative">
         <motion.div
           style={{ x, y }}
-          className="w-24 h-24 bg-red-500 absolute bottom-1/2 left-1/2"
+          className="w-24 h-24 bg-red-500 absolute bottom-24 left-1/2"
+          ref={enemy}
         ></motion.div>
-        <motion.img style={{ x, y }} src="/building.png" width={400} />
-        <motion.div className="w-24 h-24 bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"></motion.div>
+        <motion.img
+          style={{ x, y }}
+          src="/building.png"
+          width={400}
+          ref={building}
+        />
+        <motion.div
+          className="w-24 h-24 bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"
+          ref={player}
+        ></motion.div>
       </div>
       <div className="flex justify-center">
         <div className="flex items-center gap-32">
