@@ -132,7 +132,7 @@ export default function Home() {
         <motion.img
           style={{ x, y }}
           src="/building.png"
-          width={400}
+          className="w-[400px]"
           ref={(r) => world.current.push(r)}
         />
         <motion.div
