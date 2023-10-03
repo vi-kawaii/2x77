@@ -28,7 +28,12 @@ export default function Home() {
         rect1.top > rect2.bottom
       );
 
-    if (checkKey("a") || checkKey("ф") || checkKey("arrowleft")) {
+    if (
+      checkKey("a") ||
+      checkKey("ф") ||
+      checkKey("arrowleft") ||
+      state.current === "LEFT"
+    ) {
       const pNew = {
         right: p.right - 2,
         left: p.left - 2,
@@ -41,7 +46,12 @@ export default function Home() {
       }
 
       setX((x) => x + 2);
-    } else if (checkKey("d") || checkKey("в") || checkKey("arrowright")) {
+    } else if (
+      checkKey("d") ||
+      checkKey("в") ||
+      checkKey("arrowright") ||
+      state.current === "RIGHT"
+    ) {
       const pNew = {
         right: p.right + 2,
         left: p.left + 2,
@@ -54,7 +64,12 @@ export default function Home() {
       }
 
       setX((x) => x - 2);
-    } else if (checkKey("w") || checkKey("ц") || checkKey("arrowup")) {
+    } else if (
+      checkKey("w") ||
+      checkKey("ц") ||
+      checkKey("arrowup") ||
+      state.current === "FORWARD"
+    ) {
       const pNew = {
         right: p.right,
         left: p.left,
@@ -67,7 +82,12 @@ export default function Home() {
       }
 
       setY((y) => y + 2);
-    } else if (checkKey("s") || checkKey("ы") || checkKey("arrowdown")) {
+    } else if (
+      checkKey("s") ||
+      checkKey("ы") ||
+      checkKey("arrowdown") ||
+      state.current === "BACKWARD"
+    ) {
       const pNew = {
         right: p.right,
         left: p.left,
@@ -79,16 +99,6 @@ export default function Home() {
         return;
       }
 
-      setY((y) => y - 2);
-    }
-
-    if (state.current === "RIGHT") {
-      setX((x) => x - 2);
-    } else if (state.current === "LEFT") {
-      setX((x) => x + 2);
-    } else if (state.current === "FORWARD") {
-      setY((y) => y + 2);
-    } else if (state.current === "BACKWARD") {
       setY((y) => y - 2);
     }
   }, 1 / 60);
