@@ -9,13 +9,10 @@ import { checkKey } from "@rwh/keystrokes";
 export default function Home() {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-  const state = useRef(null);
 
-  const building = useRef();
-  const enemy = useRef();
+  const state = useRef(null);
+  const world = useRef([]);
   const player = useRef();
-  const enemy2 = useRef();
-  const enemy3 = useRef();
 
   useInterval(() => {
     const p = player.current.getBoundingClientRect();
@@ -29,9 +26,7 @@ export default function Home() {
       );
 
     const worldOverlap = (p) =>
-      [enemy, enemy2, enemy3, building].some((x) =>
-        overlap(p, x.current.getBoundingClientRect())
-      );
+      world.current.some((x) => overlap(p, x.getBoundingClientRect()));
 
     if (
       checkKey("a") ||
@@ -122,23 +117,23 @@ export default function Home() {
         <motion.div
           style={{ x, y }}
           className="w-24 h-24 bg-red-500 absolute bottom-12 left-1/2"
-          ref={enemy}
+          ref={(r) => world.current.push(r)}
         ></motion.div>
         <motion.div
           style={{ x, y }}
           className="w-24 h-24 bg-red-500 absolute bottom-12 left-100"
-          ref={enemy2}
+          ref={(r) => world.current.push(r)}
         ></motion.div>
         <motion.div
           style={{ x, y }}
           className="w-24 h-24 bg-red-500 absolute bottom-12 left-[200px]"
-          ref={enemy3}
+          ref={(r) => world.current.push(r)}
         ></motion.div>
         <motion.img
           style={{ x, y }}
           src="/building.png"
           width={400}
-          ref={building}
+          ref={(r) => world.current.push(r)}
         />
         <motion.div
           className="w-24 h-24 bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"
