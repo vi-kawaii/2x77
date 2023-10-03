@@ -116,7 +116,7 @@ export default function Home() {
       <div className="h-[calc(100vh-140px)] relative">
         <motion.div
           style={{ x, y }}
-          className="w-24 h-24 bg-red-500 absolute bottom-24 left-1/2"
+          className="w-24 h-24 bg-red-500 absolute bottom-12 left-1/2"
           ref={enemy}
         ></motion.div>
         <motion.img
@@ -130,8 +130,8 @@ export default function Home() {
           ref={player}
         ></motion.div>
       </div>
-      <div className="flex justify-center">
-        <div className="flex items-center gap-32">
+      <div className="flex justify-center sm:hidden">
+        <div className="flex items-center gap-32 z-20">
           <div className="bg-white inline-block p-3 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
