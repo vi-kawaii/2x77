@@ -14,11 +14,11 @@ export default function Home() {
   const building = useRef();
   const enemy = useRef();
   const player = useRef();
+  const enemy2 = useRef();
+  const enemy3 = useRef();
 
   useInterval(() => {
     const p = player.current.getBoundingClientRect();
-    const e = enemy.current.getBoundingClientRect();
-    const b = building.current.getBoundingClientRect();
 
     const overlap = (rect1, rect2) =>
       !(
@@ -26,6 +26,11 @@ export default function Home() {
         rect1.left > rect2.right ||
         rect1.bottom < rect2.top ||
         rect1.top > rect2.bottom
+      );
+
+    const worldOverlap = (p) =>
+      [enemy, enemy2, enemy3, building].some((x) =>
+        overlap(p, x.current.getBoundingClientRect())
       );
 
     if (
@@ -41,7 +46,7 @@ export default function Home() {
         top: p.top,
       };
 
-      if (overlap(pNew, e) || overlap(pNew, b)) {
+      if (worldOverlap(pNew)) {
         return;
       }
 
@@ -59,7 +64,7 @@ export default function Home() {
         top: p.top,
       };
 
-      if (overlap(pNew, e) || overlap(pNew, b)) {
+      if (worldOverlap(pNew)) {
         return;
       }
 
@@ -77,7 +82,7 @@ export default function Home() {
         top: p.top - 2,
       };
 
-      if (overlap(pNew, e) || overlap(pNew, b)) {
+      if (worldOverlap(pNew)) {
         return;
       }
 
@@ -95,7 +100,7 @@ export default function Home() {
         top: p.top + 2,
       };
 
-      if (overlap(pNew, e) || overlap(pNew, b)) {
+      if (worldOverlap(pNew)) {
         return;
       }
 
@@ -118,6 +123,16 @@ export default function Home() {
           style={{ x, y }}
           className="w-24 h-24 bg-red-500 absolute bottom-12 left-1/2"
           ref={enemy}
+        ></motion.div>
+        <motion.div
+          style={{ x, y }}
+          className="w-24 h-24 bg-red-500 absolute bottom-12 left-100"
+          ref={enemy2}
+        ></motion.div>
+        <motion.div
+          style={{ x, y }}
+          className="w-24 h-24 bg-red-500 absolute bottom-12 left-[200px]"
+          ref={enemy3}
         ></motion.div>
         <motion.img
           style={{ x, y }}
