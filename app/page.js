@@ -115,24 +115,24 @@ export default function Home() {
     <div className="h-screen p-2 overflow-hidden">
       <div className="h-[calc(100vh-140px)] relative">
         <motion.div
-          style={{ x, y }}
-          className="w-24 h-24 bg-red-500 absolute bottom-12 left-1/2"
+          style={{ x: x + 600, y: y + 0 }}
+          className="w-[100px] h-[100px] bg-red-500 absolute"
           ref={(r) => world.current.push(r)}
         ></motion.div>
         <motion.div
-          style={{ x, y }}
-          className="w-24 h-24 bg-red-500 absolute bottom-12 left-100"
+          style={{ x: x + 0, y: y + 200 }}
+          className="w-[100px] h-[100px] bg-red-500 absolute"
           ref={(r) => world.current.push(r)}
         ></motion.div>
         <motion.div
-          style={{ x, y }}
-          className="w-24 h-24 bg-red-500 absolute bottom-12 left-[200px]"
+          style={{ x: x + 800, y: y + 400 }}
+          className="w-[100px] h-[100px] bg-red-500 absolute"
           ref={(r) => world.current.push(r)}
         ></motion.div>
         <motion.img
-          style={{ x, y }}
+          style={{ x: x + 0, y: y + 0 }}
           src="/building.png"
-          className="w-[400px]"
+          className="w-[400px] absolute"
           ref={(r) => world.current.push(r)}
         />
         <motion.div
