@@ -136,7 +136,7 @@ export default function Home() {
           ref={(r) => world.current.push(r)}
         />
         <motion.div
-          className="w-24 h-24 bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"
+          className="w-[100px] h-[100px] bg-white absolute bottom-[calc(50vh-150px)] -translate-x-1/2 left-1/2"
           ref={player}
         ></motion.div>
       </div>
